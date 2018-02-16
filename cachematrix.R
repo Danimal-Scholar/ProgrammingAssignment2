@@ -2,12 +2,13 @@
 #square matrix. All unique 'vectors' created by this function have the option to cache
 # the inverse in a separate environment (make sure the inverse IS THE INVERSE!!)
 
-makeCacheMatrix <- function(xmat){
+makeCacheMatrix <- function(xmat=matrix()){
      
      #should we set the matrix in the main function, its inverse 
      #is initialized to 'NULL'. Otherwise placed in separate environment
      #when setMat is called.
-     matSpace <- NULL
+     
+	 matSpace <- NULL
      setMat <- function(ymat){
           xmat <<- ymat
           matSpace <<- NULL
@@ -15,12 +16,14 @@ makeCacheMatrix <- function(xmat){
      }
      
      #gets the value of the matrix or inverse from the list
-     getMat <- function() xmat
+     
+	 getMat <- function() xmat
      getInvmat <- function() matSpace
      
      #option to manually set the value,
      #or used to pass the calcualtion, and puts it in the cache
-     setInvmat <- function(invxmat) matSpace <<- invxmat
+     
+	 setInvmat <- function(invxmat) matSpace <<- invxmat
      
      #this is what is returned: a list of functions within the 'vector' 
      #calling the respective values
@@ -37,13 +40,15 @@ makeCacheMatrix <- function(xmat){
 cacheSolve <- function(xmat, ...) {
      matSpace <- xmat$getInvmat()
      # If the inverse has been cached....
-     if(!is.null(matSpace)) {
+     
+	 if(!is.null(matSpace)) {
           message("getting cached data")
           return(matSpace)
      }
 
      # If the inverse has NOT been cached...
-     data <- xmat$getMat()
+     
+	 data <- xmat$getMat()
      matSpace <- solve(data, ...)
      xmat$setInvmat(matSpace)
      matSpace
